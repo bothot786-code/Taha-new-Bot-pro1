@@ -1,13 +1,7 @@
 # Dependencies
 node_modules/
 
-# Developes
-fca-updated/
-
-fca-updated1/
-
-# Fca Database
-PriyanshFca_Database/
+ai-command-generator/
 
 # Logs
 logs
@@ -35,6 +29,10 @@ pids
 .vscode/
 *.swp
 *.swo
+
+# Public publish staging directory
+dist_public/
+publish.config.json
 
 # OS files
 .DS_Store

@@ -38,7 +38,16 @@ if (!fs.existsSync('./public')) {
 
 // Connect to MongoDB
 mongoose.set('strictQuery', false);
-console.log('[CONSOLE] Attempting to connect to MongoDB with URI:', global.config.mongoURI);
+// [FCA-PRIYANSH FIX #46] Mask the DB URI in console (was printing full URI with password).
+// Show only host, hide credentials — safe for screenshots/logs.
+function _maskMongoUri(uri) {
+  try {
+    if (!uri || typeof uri !== 'string') return '(not set)';
+    // Hide user:pass@ part and query string
+    return uri.replace(/\/\/([^@]+)@/, '//****:****@').replace(/\?.*$/, '');
+  } catch { return '(hidden)'; }
+}
+console.log('[CONSOLE] Connecting to MongoDB:', _maskMongoUri(global.config.mongoURI));
 mongoose.connect(global.config.mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true

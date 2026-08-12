@@ -1,5 +1,5 @@
 
-# Priyansh Facebook Messenger Bot - Full Documentation
+# Facebook Messenger Bot - Full Documentation
 
 This document provides a comprehensive overview of the Facebook Messenger Bot, its architecture, features, and how to extend its functionality. This guide is designed to be used by developers and AI assistants to understand the bot's codebase and create new commands and features.
 

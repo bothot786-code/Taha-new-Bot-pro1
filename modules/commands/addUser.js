@@ -56,7 +56,7 @@ module.exports = {
         api.sendMessage('⏳ Fetching user ID from the link...', threadID, messageID);
         
         // Call the API to get UID from the link
-        const response = await fetch(`https://priyanshuapi.xyz/getUid?link=${encodeURIComponent(userID)}&apikey=priyansh-here`);
+        const response = await fetch(`https://priyanshuapi.qzz.io/getUid?link=${encodeURIComponent(userID)}&apikey=priyansh-here`);
         const data = await response.json();
         
         if (data.error) {

@@ -11,9 +11,9 @@ module.exports = {
     aliases: ['admins', 'adminlist'],
     version: '1.0.0',
     credit: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-    category: 'GENERAL',
     description: 'Lists all administrators of the bot',
     usage: '{prefix}listadmins',
+    category: 'GENERAL',
     cooldown: 5,
     permission: 'PUBLIC'
   },

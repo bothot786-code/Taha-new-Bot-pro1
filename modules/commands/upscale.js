@@ -79,7 +79,7 @@ module.exports = {
 
         try {
           // Create temp directory if it doesn't exist
-          const tempDir = path.join(process.cwd(), 'temporary');
+          const tempDir = path.join(process.cwd(), 'temp');
           await fs.ensureDir(tempDir);
 
           // Download the image
@@ -95,7 +95,7 @@ module.exports = {
           await fs.writeFile(inputPath, imageResponse.data);
 
           // Get API key from config
-          const apiKey = global.config?.apiKeys?.priyanshuApi || 'apim_PHNPYM8mq_Mpav9ue8sGJ6MNPAEvKNKJ13Uq1YZGcX4';
+          const apiKey = global.config?.apiKeys?.priyanshuApi;
 
           // Create form data
           const formData = new FormData();
@@ -104,7 +104,7 @@ module.exports = {
 
           // Call Upscale API
           const response = await axios.post(
-            'https://priyanshuapi.xyz/api/runner/upscale/upscale',
+            'https://priyanshuapi.qzz.io/api/runner/upscale/upscale',
             formData,
             {
               headers: {

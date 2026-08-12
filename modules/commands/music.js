@@ -84,7 +84,7 @@ module.exports.run = async function ({ api, message, args }) {
         }
 
         // Call the API
-        const apiUrl = "https://priyanshuapi.xyz/api/runner/youtube-downloader-v2/download";
+        const apiUrl = "https://priyanshuapi.qzz.io/api/runner/youtube-downloader-v2/download";
         const response = await axios.post(
             apiUrl,
             {
@@ -141,7 +141,7 @@ module.exports.run = async function ({ api, message, args }) {
         });
 
         // Download file
-        const tempDir = path.join(__dirname, "tempsr");
+        const tempDir = path.join(__dirname, "temporary");
         if (!fs.existsSync(tempDir)) {
             fs.mkdirSync(tempDir, { recursive: true });
         }

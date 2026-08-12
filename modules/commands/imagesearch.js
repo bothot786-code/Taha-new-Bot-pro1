@@ -15,7 +15,7 @@ module.exports = {
     description: "Search and send images from Google",
     usages: "{prefix}imagesearch <search query>",
     credit: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-    category: "MEDIA",
+    category: 'MEDIA',
     hasPrefix: true,
     permission: "PUBLIC",
     cooldowns: 5

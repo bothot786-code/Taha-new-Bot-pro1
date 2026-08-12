@@ -29,11 +29,11 @@ module.exports = {
 
         try {
             // Get API key from config
-            const apiKey = global.config?.apiKeys?.priyanshuApi || 'apim_PHNPYM8mq_Mpav9ue8sGJ6MNPAEvKNKJ13Uq1YZGcX4';
+            const apiKey = global.config?.apiKeys?.priyanshuApi;
 
             // Fetch package info from API
             const response = await axios.post(
-                'https://priyanshuapi.xyz/api/runner/npm-package-info/fetch',
+                'https://priyanshuapi.qzz.io/api/runner/npm-package-info/fetch',
                 { package: packageName },
                 {
                     headers: {

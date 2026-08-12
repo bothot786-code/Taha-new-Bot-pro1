@@ -10,8 +10,8 @@ module.exports = {
     description: "Shows how long the bot has been running",
     usages: "{prefix}uptime",
     credit: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-    category: "GENERAL",
-    hasPrefix: true,
+    hasPrefix: false,
+    category: "General",
     permission: "PUBLIC",
     cooldowns: 5
   },
@@ -23,7 +23,7 @@ module.exports = {
    * @param {Object} options.message - Message object
    * @param {Array<string>} options.args - Command arguments
    */
-  run: async function ({ api, message, args }) {
+  run: async function ({ api, message }) {
     const { threadID, messageID } = message;
 
     // Use server module's formatUptime if available, otherwise calculate manually

@@ -10,7 +10,7 @@ module.exports = {
     description: "Displays information about the bot's hosting options and current status",
     usages: "{prefix}hosting",
     credit: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-    category: "GENERAL",
+    category: 'GENERAL',
     hasPrefix: true,
     permission: "PUBLIC",
     cooldowns: 5

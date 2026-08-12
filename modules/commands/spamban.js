@@ -13,7 +13,7 @@ module.exports = {
     description: "Manage spam detection and auto-banning",
     usages: "{prefix}spamban <on/off/status/reset>",
     credit: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-    category: "ADMIN",
+    category: 'ADMIN',
     hasPrefix: true,
     permission: "ADMIN",
     cooldowns: 5

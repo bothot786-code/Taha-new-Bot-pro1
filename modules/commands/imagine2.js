@@ -38,7 +38,7 @@ module.exports = {
       // Call the TAAFT image generation API - handle 504 gracefully
       console.log("🚀 Calling API...");
       
-      const response = await fetch("https://priyanshuapi.xyz/api/runner/taaft-image-gen/generate", {
+      const response = await fetch("https://priyanshuapi.qzz.io/api/runner/pollinations-image-gen/generate", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${apiKey}`,
@@ -46,7 +46,7 @@ module.exports = {
         },
         body: JSON.stringify({
           prompt: prompt,
-          aspectRatio: "16:9"
+          width: 'auto'
         })
       });
 
@@ -60,7 +60,7 @@ module.exports = {
         await new Promise(resolve => setTimeout(resolve, 30000));
         
         console.log("🔄 Trying one more time...");
-        const retryResponse = await fetch("https://priyanshuapi.xyz/api/runner/taaft-image-gen/generate", {
+        const retryResponse = await fetch("https://priyanshuapi.qzz.io/api/runner/taaft-image-gen/generate", {
           method: "POST",
           headers: {
             "Authorization": `Bearer ${apiKey}`,

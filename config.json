@@ -1,5 +1,6 @@
 {
-  "mongoURI": "",
+  "mongoURI": "mongodb+srv://username:pass@cluster0.8ib7j.mongodb.net/facebook_bot?retryWrites=true&w=majority&appName=Cluster0",
+  "appstateSyncMinutes": 10,
   "ownerID": "100037743553265",
   "adminIDs": [
     "100037743553265",
@@ -50,13 +51,6 @@
   "autosend": {
     "enabled": false,
     "checkIntervalMinutes": 1
-  },
-  "sessionManagement": {
-    "enabled": true,
-    "refreshIntervalMinutes": 10,
-    "dtsgRefreshHours": 2,
-    "maxReconnectAttempts": 5,
-    "autoSaveAppstate": true
   },
   "unsendReaction": "🖤",
   "apiKeys": {

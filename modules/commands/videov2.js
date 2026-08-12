@@ -31,7 +31,7 @@ module.exports.run = async function ({ api, message, args }) {
         }
 
         const results = searchResults.videos.slice(0, 6);
-        const thumbDir = path.join(__dirname, "temporary");
+        const thumbDir = path.join(__dirname, "temp");
         if (!fs.existsSync(thumbDir)) fs.mkdirSync(thumbDir, { recursive: true });
 
         let msg = "🎬 Top 6 results:\n\n";
@@ -128,7 +128,7 @@ module.exports.handleReply = async function ({ api, message, replyData }) {
 
         for (const q of qualitiesToTry) {
             try {
-                const apiUrl = "https://priyanshuapi.xyz/api/runner/youtube-downloader-v2/download";
+                const apiUrl = "https://priyanshuapi.qzz.io/api/runner/youtube-downloader-v2/download";
                 const response = await axios.post(
                     apiUrl,
                     {
@@ -196,7 +196,7 @@ module.exports.handleReply = async function ({ api, message, replyData }) {
         const downloadingMsg = await api.sendMessage(`⏳ Downloading ${finalTitle} (${successfulQuality}p)...`, threadID, messageID);
 
         // Download file
-        const tempDir = path.join(__dirname, "temporary");
+        const tempDir = path.join(__dirname, "temp");
         if (!fs.existsSync(tempDir)) {
             fs.mkdirSync(tempDir, { recursive: true });
         }

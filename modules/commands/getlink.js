@@ -55,7 +55,7 @@ module.exports = {
 
                 try {
                     // Create temp directory if it doesn't exist
-                    const tempDir = path.join(process.cwd(), 'temporary');
+                    const tempDir = path.join(process.cwd(), 'temp');
                     await fs.ensureDir(tempDir);
 
                     const downloadedFiles = [];
@@ -109,7 +109,7 @@ module.exports = {
                     }
 
                     // Get API key from config
-                    const apiKey = global.config?.apiKeys?.priyanshuApi || 'apim_PHNPYM8mq_Mpav9ue8sGJ6MNPAEvKNKJ13Uq1YZGcX4';
+                    const apiKey = global.config?.apiKeys?.priyanshuApi;
 
                     // Create form data and append all files
                     const formData = new FormData();
@@ -119,7 +119,7 @@ module.exports = {
 
                     // Upload to API
                     const uploadResponse = await axios.post(
-                        'https://priyanshuapi.xyz/api/runner/file-upload/upload',
+                        'https://priyanshuapi.qzz.io/api/runner/file-upload/upload',
                         formData,
                         {
                             headers: {

@@ -80,11 +80,11 @@ module.exports = {
       global.logger.debug(`Slap command: Using gender ${genderType} for sender gender ${senderInfo.gender}`);
 
       // Get API key from config
-      const apiKey = global.config?.apiKeys?.priyanshuApi || 'apim_PHNPYM8mq_Mpav9ue8sGJ6MNPAEvKNKJ13Uq1YZGcX4';
+      const apiKey = global.config?.apiKeys?.priyanshuApi;
 
       // Fetch GIF directly from new API (returns arraybuffer)
       const response = await axios.post(
-        'https://priyanshuapi.xyz/api/runner/slap-gif/fetch',
+        'https://priyanshuapi.qzz.io/api/runner/slap-gif/fetch',
         { gender: genderType },
         {
           headers: {

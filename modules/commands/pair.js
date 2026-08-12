@@ -10,6 +10,7 @@ const axios = require('axios');
 const { createCanvas, loadImage } = require('canvas');
 
 const FALLBACK_GRAPH_TOKEN = '6628568379%7Cc1e620fa708a1d5696fb991c1bde5662';
+const { normalizeGender } = global.gender || require('../../utils/gender');
 
 module.exports = {
   config: {
@@ -24,7 +25,7 @@ module.exports = {
     category: 'FUN'
   },
 
-  run: async function({ api, message, args }) {
+  run: async function({ api, message }) {
     const { threadID, messageID, senderID } = message;
 
     try {
@@ -35,22 +36,14 @@ module.exports = {
       }
 
       const senderData = senderInfo[senderID];
-      console.log(senderData);
       const senderGender = senderData.gender;
       const senderName = senderData.name || "Unknown User";
 
-      // Determine target gender (opposite gender)
-      let targetGender;
-      // Check for female gender (1 or 'female')
-      if (senderGender === 1 || senderGender === 'FEMALE') {
-        targetGender = [2, 'MALE']; // Looking for male users
-      } 
-      // Check for male gender (2 or 'male')
-      else if (senderGender === 2 || senderGender === 'MALE') {
-        targetGender = [1, 'FEMALE']; // Looking for female users
-      } else {
+      const normalizedSenderGender = normalizeGender(senderGender);
+      if (!normalizedSenderGender) {
         return api.sendMessage("❌ Your gender data is not clear. Please update your profile.", threadID, messageID);
       }
+      const targetGender = normalizedSenderGender === 'FEMALE' ? 'MALE' : 'FEMALE';
 
       // Get all thread members except sender
       const threadInfo = await api.getThreadInfo(threadID);
@@ -60,31 +53,49 @@ module.exports = {
         return api.sendMessage("❌ No other members found in this group to match with.", threadID, messageID);
       }
 
-      // Find users with opposite gender
+      // Build quick lookup from threadInfo user data
+      const participantInfoMap = buildParticipantInfoMap(threadInfo.userInfo);
+      const missingGenderIDs = [];
       const potentialMatches = [];
+
       for (const userID of participantIDs) {
+        const info = participantInfoMap.get(userID);
+        if (info && info.gender !== undefined && info.gender !== null) {
+          const normalizedGender = normalizeGender(info.gender);
+          if (normalizedGender === targetGender) {
+            potentialMatches.push({
+              userID,
+              name: info.name || "Unknown User",
+              gender: normalizedGender
+            });
+          }
+        } else {
+          missingGenderIDs.push(userID);
+        }
+      }
+
+      // Fallback: fetch gender for users missing data (single batched call)
+      if (potentialMatches.length === 0 && missingGenderIDs.length > 0) {
         try {
-          const userInfo = await api.getUserInfo(userID);
-          if (userInfo && userInfo[userID]) {
-            const userData = userInfo[userID];
-            const userGender = userData.gender;
-            
-            // Check if user has opposite gender
-            if (targetGender.includes(userGender)) {
+          const fetchedInfo = await api.getUserInfo(missingGenderIDs);
+          for (const userID of Object.keys(fetchedInfo || {})) {
+            const userData = fetchedInfo[userID];
+            const normalizedGender = normalizeGender(userData?.gender);
+            if (normalizedGender === targetGender) {
               potentialMatches.push({
-                userID: userID,
-                name: userData.name || "Unknown User",
-                gender: userGender
+                userID,
+                name: userData?.name || "Unknown User",
+                gender: normalizedGender
               });
             }
           }
         } catch (error) {
-          console.log(`[pair] Could not get info for user ${userID}`);
+          console.warn("[pair] Failed to load additional user info for matching:", error.message);
         }
       }
 
       if (potentialMatches.length === 0) {
-        const genderText = targetGender.includes(1) || targetGender.includes('female') ? "female" : "male";
+        const genderText = targetGender === 'FEMALE' ? "female" : "male";
         return api.sendMessage(`❌ No ${genderText} member found in this group to pair with you.`, threadID, messageID);
       }
 
@@ -115,7 +126,7 @@ module.exports = {
       const matchProfileUrl = `https://graph.facebook.com/${randomMatch.userID}/picture?height=720&width=720&access_token=${graphToken}`;
 
       // Create temp paths
-      const tempDir = path.join(__dirname, 'temporary');
+      const tempDir = path.join(__dirname, 'temp');
       if (!fs.existsSync(tempDir)) {
         fs.mkdirSync(tempDir, { recursive: true });
       }
@@ -472,5 +483,20 @@ function cleanupFiles(files) {
       }
     });
   }, 5000); // Clean up after 5 seconds
+}
+
+function buildParticipantInfoMap(userInfoArray = []) {
+  const map = new Map();
+  if (Array.isArray(userInfoArray)) {
+    for (const info of userInfoArray) {
+      if (info && info.id) {
+        map.set(info.id, {
+          gender: info.gender,
+          name: info.name
+        });
+      }
+    }
+  }
+  return map;
 }
 

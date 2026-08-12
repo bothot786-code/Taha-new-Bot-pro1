@@ -33,9 +33,10 @@ module.exports = {
       }
 
       // Call the Pollinations image generation API
-      const { data } = await axios.post("https://priyanshu-apis-frontend.onrender.com/api/runner/pollinations-image-gen/generate", {
+      const { data } = await axios.post("https://priyanshuapi.qzz.io/api/runner/flatai-image-gen/generate", {
         prompt: prompt,
-        width: 1200
+        model: 'runware_new_quality',
+        aspectRatio: '16:9'
       }, {
         headers: {
           "Authorization": `Bearer ${apiKey}`,

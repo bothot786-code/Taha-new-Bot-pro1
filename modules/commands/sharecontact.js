@@ -38,8 +38,8 @@ module.exports = {
         `/sharecontact <uid> [message] - Share a user's contact\n` +
         `/sharecontact me - Share your own contact\n\n` +
         `💡 Examples:\n` +
-        `/sharecontact 100037743553265\n` +
-        `/sharecontact 100037743553265 Ye mera dost hai\n` +
+        `/sharecontact 100076295390195\n` +
+        `/sharecontact 100076295390195 Ye mera dost hai\n` +
         `/sharecontact me`;
       
       return api.sendMessage(helpMessage, threadID, messageID);

@@ -1,6 +1,7 @@
 /**
  * Thread Image Change Event
  * Handles when a group chat's image is changed
+ * Note: Locked notification messages are handled by antichange.js with cooldown
  */
 
 module.exports = {
@@ -10,7 +11,7 @@ module.exports = {
     version: '1.0.0',
     credit: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭"
   },
-  
+
   /**
    * Event execution
    * @param {Object} options - Options object
@@ -18,36 +19,39 @@ module.exports = {
    * @param {Object} options.message - Message object
    * @param {Object} options.logMessageData - Event data
    */
-  run: async function({ api, message, logMessageData }) {
+  run: async function ({ api, message, logMessageData }) {
     const { threadID, author, image } = message;
-    
+
     try {
       // Debug log to see what's in the message
       global.logger.debug(`Thread image change event data - message: ${JSON.stringify(message)}`);
       global.logger.debug(`Thread image change event handler called with type: ${message.type}`);
       global.logger.debug(`Thread image change event handler called with author: ${author}`);
       global.logger.debug(`Thread image change event handler called with threadID: ${threadID}`);
-      
+
       if (!author) {
         global.logger.error(`Missing author in thread image change event`);
         return;
       }
-      
+
       if (!image) {
         global.logger.error(`Missing image data in thread image change event`);
         return;
       }
-      
+
       // Check if anti-thread settings exist for this thread
       const antiThread = await global.AntiThread.findOne({ threadID });
-      
-      // Check if user has permission to make changes
-      const hasPermission = await global.permissions.checkPermission(author, 'SUPPORTER');
-      
+
+      // Get bot's own ID
+      const botID = String(api.getCurrentUserID());
+
+      // Check if user has permission to make changes (only owner, bot admins, or bot itself)
+      const hasPermission = await global.permissions.checkPermission(author, 'ADMIN') || String(author) === botID;
+
       // If group image lock is enabled and user doesn't have permission, revert the change
       if (antiThread && antiThread.groupImageLock && !hasPermission) {
         global.logger.system(`Unauthorized group image change detected from user ${author}`);
-        
+
         // If we have an original image, revert the change
         if (antiThread.originalGroupImage) {
           try {
@@ -82,13 +86,8 @@ module.exports = {
                 fs.unlinkSync(imagePath);
               }
             }
-            
-            // Send notification
-            api.sendMessage(
-              '🔒 Group image is locked. Your change has been reverted.',
-              threadID
-            );
-            
+
+            // Note: Notification message is handled by antichange.js with cooldown
             global.logger.system(`Reverted unauthorized group image change`);
             return; // Exit early, don't update database or send confirmation
           } catch (revertError) {
@@ -96,15 +95,13 @@ module.exports = {
             // Continue with normal processing if revert fails
           }
         } else {
-          // Send notification that we can't automatically revert the image
-          api.sendMessage(
-            '🔒 Group image is locked. Please do not change it.',
-            threadID
-          );
+          // No original image stored, can't revert
+          // Note: Notification message is handled by antichange.js with cooldown
           global.logger.warn(`Could not revert group image for thread ${threadID} because originalGroupImage was invalid.`);
         }
+        return; // Exit early for unauthorized changes
       }
-      
+
       // If user has permission and group image lock is enabled, update the stored original image
       if (antiThread && antiThread.groupImageLock && hasPermission) {
         if (image && image.url && typeof image.url === 'string' && image.url.length > 0) {
@@ -116,7 +113,7 @@ module.exports = {
           global.logger.warn(`Could not save original group image for thread ${threadID} because image.url was invalid.`);
         }
       }
-      
+
       // Get user info of the person who changed the image
       const userInfo = await new Promise((resolve, reject) => {
         api.getUserInfo(author, (err, info) => {
@@ -124,17 +121,16 @@ module.exports = {
           resolve(info[author]);
         });
       });
-      
+
       global.logger.debug(`Got user info for ${author}: ${JSON.stringify(userInfo)}`);
-      
-      
+
       const userName = userInfo.name || 'Facebook User';
-      
+
       // Update thread info in database
       try {
         // Check if thread exists using thread controller
         const threadExists = await global.controllers.thread.exists(threadID);
-        
+
         if (threadExists) {
           // Update thread image URL in database
           await global.controllers.thread.updateThreadImage(threadID, image.url);
@@ -143,23 +139,23 @@ module.exports = {
       } catch (dbError) {
         global.logger.error(`Error updating thread image in database: ${dbError.message}`);
       }
-      
+
       // Send a confirmation message if needed
       // Only send if announceImageChange is enabled and antichange for group image is not enabled
       if (global.config.announceImageChange && (!antiThread || !antiThread.groupImageLock || hasPermission)) {
         // Customize message based on lock status
         let message = `✅ Group image has been updated by ${userName}`;
-        
+
         // If this was a privileged user updating a locked image, add that info
         if (antiThread && antiThread.groupImageLock && hasPermission) {
           message += ` (with admin privileges)`;
         }
-        
+
         api.sendMessage(message, threadID);
       } else if (antiThread && antiThread.groupImageLock && !hasPermission) {
         global.logger.system(`Suppressed group image update message because antichange is enabled for thread ${threadID}`);
       }
-      
+
     } catch (error) {
       global.logger.error(`Error in threadImage event: ${error.message}`);
     }

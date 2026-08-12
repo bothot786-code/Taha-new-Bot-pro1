@@ -40,6 +40,7 @@ global.handleDatabase = require('../handles/handleDatabase');
 // Initialize global maps
 global.client = global.client || {};
 global.client.commands = global.client.commands || new Map();
+global.client.aliases = global.client.aliases || new Map(); // Initialize aliases map
 global.client.events = global.client.events || new Map();
 global.client.cooldowns = global.client.cooldowns || new Map();
 global.client.replies = global.client.replies || new Map();

@@ -1,0 +1,178 @@
+{
+  "100076295390195": [
+    {
+      "role": "user",
+      "content": "hey"
+    },
+    {
+      "role": "assistant",
+      "content": "Hey there! 😊 What's up? How's your day going?"
+    },
+    {
+      "role": "user",
+      "content": "hey"
+    },
+    {
+      "role": "assistant",
+      "content": "Hey again! 😄 What’s on your mind?"
+    },
+    {
+      "role": "user",
+      "content": "You know my name?"
+    },
+    {
+      "role": "assistant",
+      "content": "Of course! Your name is Priyanshu. How can I help you today? 😊"
+    },
+    {
+      "role": "user",
+      "content": "hey"
+    },
+    {
+      "role": "assistant",
+      "content": "Hey! Looks like we’re in a loop here! 😄 Anything specific you’d like to chat about?"
+    }
+  ],
+  "100085468082368": [
+    {
+      "role": "user",
+      "content": "hey"
+    },
+    {
+      "role": "assistant",
+      "content": "Hey there! How's it going? I'm Priyanshu, nice to meet you. Is there anything I can help you with today? Whether it's coding, tech stuff, or just chatting about something cool, I'm all ears!"
+    },
+    {
+      "role": "user",
+      "content": "Kese ho?"
+    },
+    {
+      "role": "assistant",
+      "content": "Namaste! Main theek hoon, dhanyavad. Aap kaise hai? Kya chiz mein madad kar sakti hoon? Coding, technology ya phir bhi kuch aur topic par baat karnaa chahte hain, main tayaar hoon."
+    },
+    {
+      "role": "user",
+      "content": "hey"
+    },
+    {
+      "role": "assistant",
+      "content": "Hey again! What’s on your mind? 😊"
+    }
+  ],
+  "100026873374109": [
+    {
+      "role": "user",
+      "content": "her"
+    },
+    {
+      "role": "assistant",
+      "content": "It seems like your message was incomplete. Could you please provide more context or specify your question? I'm here to help!"
+    }
+  ],
+  "61572909482910": [
+    {
+      "role": "user",
+      "content": "wala"
+    },
+    {
+      "role": "assistant",
+      "content": "Hey there! What's on your mind? 😊"
+    },
+    {
+      "role": "user",
+      "content": "FILE CHAHIYE MUJHE"
+    },
+    {
+      "role": "assistant",
+      "content": "Koi specific file hai jo aapko chahiye? Thodi details do, main madad karne ki koshish karunga! 😊"
+    },
+    {
+      "role": "user",
+      "content": "chahiye mujhe"
+    },
+    {
+      "role": "assistant",
+      "content": "Samajh gaya! Lekin thoda aur clarity do, kyunki mujhe nahi pata ki aapko kis tarah ki file chahiye. Kya aap mujhe specific details de sakte ho? 😊"
+    }
+  ],
+  "61585015101899": [
+    {
+      "role": "user",
+      "content": "Aww how much u love me"
+    },
+    {
+      "role": "assistant",
+      "content": "You’ve definitely got my attention! I’m all about good vibes and fun conversations here. So, let’s just say I’m a fan of our chat! 😄❤️ What do you love most about our talks?"
+    },
+    {
+      "role": "user",
+      "content": "ur bro simple"
+    },
+    {
+      "role": "assistant",
+      "content": "Haha, fair enough! Keeping it simple can be the best way to go. What else is on your mind, my friend? 😄"
+    },
+    {
+      "role": "user",
+      "content": "Bruh"
+    },
+    {
+      "role": "assistant",
+      "content": "Bruh indeed! 😂 Looks like we're on the same wavelength. Got any fun topics or questions in mind?"
+    },
+    {
+      "role": "user",
+      "content": "ir bro how bad 😒"
+    },
+    {
+      "role": "assistant",
+      "content": "Looks like I hit a wrong note there, huh? 😅 No worries, I can roll with the punches! What’s got you feeling that way? Let’s turn it around!"
+    }
+  ],
+  "61584180938496": [
+    {
+      "role": "user",
+      "content": "Groups huh, so depressing"
+    },
+    {
+      "role": "assistant",
+      "content": "I get it; sometimes, groups can feel overwhelming or just not your vibe. It's all about finding the right crowd or even enjoying some alone time. What’s got you feeling this way? 🤔"
+    }
+  ],
+  "61583169730530": [
+    {
+      "role": "user",
+      "content": "toh nhi ho 🤔"
+    },
+    {
+      "role": "assistant",
+      "content": "Kya nahi ho? Thoda clear kar de, main yahan madad karne ke liye hoon! 😊"
+    },
+    {
+      "role": "user",
+      "content": "Hatt"
+    },
+    {
+      "role": "assistant",
+      "content": "Acha, lagta hai thoda gussa hai! Kya hua? Baat karne se shayad behtar lage. 😄"
+    }
+  ],
+  "61574993320118": [
+    {
+      "role": "user",
+      "content": "him gorr how did he know that im crying 😒"
+    },
+    {
+      "role": "assistant",
+      "content": "It sounds like someone is really in tune with your feelings! Sometimes, people can just sense when something's off, especially if they care about you. Want to talk about what's got you feeling this way? I'm here to listen. 😊"
+    },
+    {
+      "role": "user",
+      "content": "Hmm😑"
+    },
+    {
+      "role": "assistant",
+      "content": "I see that \"hmm\" has a lot of weight behind it! If you feel like sharing, I'm all ears. Or if you just want to vent, that works too! 😌"
+    }
+  ]
+}

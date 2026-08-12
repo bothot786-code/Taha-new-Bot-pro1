@@ -10,7 +10,7 @@ module.exports = {
     description: "Displays information about the bot's Render.com hosting and uptime monitoring",
     usages: "{prefix}renderinfo",
     credit: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-    category: "GENERAL",
+    category: 'GENERAL',
     hasPrefix: true,
     permission: "PUBLIC",
     cooldowns: 5

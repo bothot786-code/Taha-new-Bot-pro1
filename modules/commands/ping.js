@@ -10,7 +10,7 @@ module.exports = {
     description: "Checks if the bot is alive",
     usages: "{prefix}ping",
     credit: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-    category: "GENERAL",
+    category: 'GENERAL',
     hasPrefix: true,
     permission: "PUBLIC",
     cooldowns: 3

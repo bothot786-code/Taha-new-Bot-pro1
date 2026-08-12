@@ -11,7 +11,7 @@ module.exports = {
     usage: '{prefix}fbshare <postID>',
     credit: '𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭',
     hasPrefix: true,
-    permission: 'public',
+    permission: 'ADMIN',
     cooldown: 5,
     category: 'SOCIAL'
   },

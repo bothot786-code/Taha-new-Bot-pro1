@@ -10,7 +10,7 @@ module.exports = {
     description: 'List users with missing currency records',
     usage: '{prefix}missingcurrency',
     credit: '𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭',
-    category: 'ADMIN',
+    category: 'ECONOMY',
     hasPrefix: true,
     permission: 'ADMIN', // Only admins can use this command
     cooldown: 30

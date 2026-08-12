@@ -10,7 +10,7 @@ module.exports = {
     description: "Configure the bot's web server settings including enabling/disabling, port, and uptime monitoring",
     usages: "{prefix}server-config [option] [value]",
     credit: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-    category: "CONFIG",
+    category: 'CONFIG',
     hasPrefix: true,
     permission: "OWNER",
     cooldowns: 5

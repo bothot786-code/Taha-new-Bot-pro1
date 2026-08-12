@@ -233,7 +233,7 @@ async function sendLevelUpNotification(api, threadID, userID, rankupData) {
     ctx.fillText(bonusText, width - ctx.measureText(bonusText).width - 80, 350);
 
     // Save Image
-    const tempDir = path.join(__dirname, 'temporary');
+    const tempDir = path.join(__dirname, 'temp');
     if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
     const pathImg = path.join(tempDir, `rankup_${userID}.png`);
     fs.writeFileSync(pathImg, canvas.toBuffer());

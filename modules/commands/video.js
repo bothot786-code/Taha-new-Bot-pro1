@@ -106,7 +106,7 @@ module.exports.run = async function ({ api, message, args }) {
         // Try to get a valid download link
         for (const q of qualitiesToTry) {
             try {
-                const apiUrl = "https://priyanshuapi.xyz/api/runner/youtube-downloader-v2/download";
+                const apiUrl = "https://priyanshuapi.qzz.io/api/runner/youtube-downloader-v2/download";
                 const response = await axios.post(
                     apiUrl,
                     {

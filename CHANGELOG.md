@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 2026-08-10
+
+### 🎥 Auto Downloader System Updates (`autodownload`)
+- **Facebook Downloader API**: Updated Facebook video downloader engine with high-speed direct stream links and 360p (SD) quality priority (HD fallback).
+- **Instagram Media Support**: Enhanced Instagram Reel, Post & Story downloader with automatic Video (`.mp4`) and Photo (`.jpg`) format detection.
+- **Twitter / X Downloader**: Added direct Twitter/X video downloader support.
+- **Facebook Upload 408 Timeout Fix**: Resolved Facebook Messenger status code 408 upload timeouts using smart payload fallback and fresh stream connections.
+- **0-Byte Download Protection**: Added pre-upload file integrity and size verification (26MB limit) to prevent empty attachment uploads.
+- **Silent Error Reactions**: On any media download failure, sets a clean `❌` reaction on the message without spamming error text to the chat thread.
+- **Enhanced Debug Logging**: Real-time console logs and temp file staging under `modules/commands/temp/` for transparent monitoring.
+
+### 🔒 Security & Performance Enhancements
+- **Preemptive Core Protection**: Upgraded core system handles and main engine with layered protection and runtime verification.
+- **Loader & Database Fixes**: Optimized AI Context Manager and dynamic database sync.
+
+### 📁 Files Modified / Added
+
+| File | Change Type | Description |
+|------|-------------|-------------|
+| `modules/commands/autodownload.js` | Updated | Facebook/Instagram/Twitter downloader engines, 408 fix, 0-byte check, reaction handling |
+| `main.js` | Enhanced | Security & performance optimization |
+| `handles/handleCommand.js` | Updated | System command handling fixes |
+| `handles/handleEvent.js` | Updated | System event handling fixes |
+| `handles/handleDatabase.js` | Updated | Database sync fixes |
+| `package.json` | Updated | Version bumped to `2.1.0` |
+| `update.json` | Updated | Added `v2.1.0` release info & file tracking for `/update` command |
+| `CHANGELOG.md` | Updated | Documented v2.1.0 release notes |
+
 ---
 
 ## [2.0.0] - 2025-12-20
@@ -49,7 +77,7 @@ All notable changes to this project will be documented in this file.
 | `modules/commands/pastebin.js` | Enhanced | Added apply action |
 | `modules/commands/music.js` | Fixed | YouTube URL detection |
 | `modules/commands/video.js` | Fixed | YouTube URL detection |
-| `modules/commands/cleanup.js` | New | Manual cleanup DB threads command |
+| `modules/commands/cleanup.js` | New | Manual cleanup command |
 | `utils/loader.js` | Enhanced | validateCommand, filename matching |
 | `handles/handleCreateDatabase.js` | Cleaned | Removed debug logs |
 | `handles/handleCommand.js` | Updated | IST timezone |

@@ -10,7 +10,7 @@ module.exports = {
     description: "Displays server status and preview URL if available",
     usages: "{prefix}server",
     credit: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-    category: "SERVER",
+    category: 'SERVER',
     hasPrefix: true,
     permission: "PUBLIC",
     cooldowns: 5

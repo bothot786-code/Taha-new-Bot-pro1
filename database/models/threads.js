@@ -78,6 +78,10 @@ const threadSchema = new Schema({
       enum: ['owner', 'admin', 'support', null],
       default: null  // null means public (no restriction)
     },
+    bannedCommands: {
+      type: [String],  // Array of banned command names
+      default: []
+    },
     updatedAt: {
       type: Date,
       default: Date.now

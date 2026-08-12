@@ -11,7 +11,6 @@ module.exports = {
     aliases: ['refresh'],
     version: '1.0.0',
     credit: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-    category: 'ADMIN',
     description: 'Reloads a specific command without restarting the bot',
     usage: '{prefix}reload <command_name>',
     cooldown: 5,

@@ -15,7 +15,7 @@ module.exports = {
     cooldown: 5,
     category: 'ADMIN'
   },
-  
+
   /**
    * Command execution
    * @param {Object} options - Options object
@@ -23,31 +23,33 @@ module.exports = {
    * @param {Object} options.message - Message object
    * @param {Array<string>} options.args - Command arguments
    */
-  run: async function({ api, message, args }) {
+  run: async function ({ api, message, args }) {
     const { threadID, messageID, senderID, mentions } = message;
-    
+
     // Check if no arguments provided
     if (args.length === 0) {
       return global.api.sendMessage(
         `🚫 Ban Command Usage:\n` +
-        `- {prefix}ban user [userID/@mention] [reason]: Ban a user\n` +
-        `- {prefix}ban thread [threadID] [reason]: Ban a thread`,
+        `• ${global.config.prefix}ban user [userID/@mention] [reason]: Ban a user\n` +
+        `• ${global.config.prefix}ban thread [threadID] [reason]: Ban a thread\n` +
+        `• ${global.config.prefix}ban command [name]: Ban a command in this group\n` +
+        `• ${global.config.prefix}ban command list: Show banned commands`,
         threadID,
         messageID
       );
     }
-    
+
     const targetType = args[0].toLowerCase();
     let targetID;
     let reason;
-    
+
     // Check if user is mentioned
     if (targetType === 'user' && Object.keys(mentions).length > 0) {
       targetID = Object.keys(mentions)[0];
       // Remove the mention from args to get the reason
       const mentionStr = mentions[targetID].replace('@', '');
       const mentionIndex = args.findIndex(arg => arg.includes(mentionStr));
-      
+
       if (mentionIndex !== -1) {
         // Remove the mention argument
         const newArgs = [...args];
@@ -62,7 +64,7 @@ module.exports = {
       targetID = args[1];
       reason = args.slice(2).join(' ') || 'No reason provided';
     }
-    
+
     if (!targetType || !targetID) {
       return global.api.sendMessage(
         '❌ Missing target type (user/thread) or ID/mention',
@@ -70,13 +72,13 @@ module.exports = {
         messageID
       );
     }
-    
+
     if (targetType === 'user') {
       // Ban user
       try {
         // Check if user exists
         let user = await global.User.findOne({ userID: targetID });
-        
+
         if (!user) {
           // Get user info from Facebook
           try {
@@ -86,7 +88,7 @@ module.exports = {
                 resolve(info[targetID]);
               });
             });
-            
+
             // Create user in database
             user = await global.User.create({
               userID: targetID,
@@ -100,7 +102,7 @@ module.exports = {
             );
           }
         }
-        
+
         // Check if user is already banned
         if (user.isBanned) {
           return global.api.sendMessage(
@@ -109,7 +111,7 @@ module.exports = {
             messageID
           );
         }
-        
+
         // Check if trying to ban owner or admin
         if (targetID === global.config.ownerID) {
           return global.api.sendMessage(
@@ -118,7 +120,7 @@ module.exports = {
             messageID
           );
         }
-        
+
         if (global.config.adminIDs.includes(targetID) && senderID !== global.config.ownerID) {
           return global.api.sendMessage(
             '❌ Only the owner can ban an admin',
@@ -126,20 +128,20 @@ module.exports = {
             messageID
           );
         }
-        
+
         // Ban user
         user.isBanned = true;
         user.banReason = reason;
         await user.save();
-        
+
         global.logger.system(`User ${targetID} (${user.name}) was banned by ${senderID}. Reason: ${reason}`);
-        
+
         return global.api.sendMessage(
           `✅ Banned user ${user.name} (${targetID})\nReason: ${reason}`,
           threadID,
           messageID
         );
-        
+
       } catch (error) {
         global.logger.error('Error in ban user command:', error.message);
         return global.api.sendMessage(
@@ -153,7 +155,7 @@ module.exports = {
       try {
         // Check if thread exists
         let thread = await global.Thread.findOne({ threadID: targetID });
-        
+
         if (!thread) {
           // Get thread info from Facebook
           try {
@@ -163,7 +165,7 @@ module.exports = {
                 resolve(info);
               });
             });
-            
+
             // Create thread in database
             thread = await global.Thread.create({
               threadID: targetID,
@@ -177,7 +179,7 @@ module.exports = {
             );
           }
         }
-        
+
         // Check if thread is already banned
         if (thread.isBanned) {
           return global.api.sendMessage(
@@ -186,26 +188,26 @@ module.exports = {
             messageID
           );
         }
-        
+
         // Ban thread
         thread.isBanned = true;
         thread.banReason = reason;
         await thread.save();
-        
+
         global.logger.system(`Thread ${targetID} (${thread.threadName}) was banned by ${senderID}. Reason: ${reason}`);
-        
+
         // Notify the banned thread
         await global.api.sendMessage(
           `⚠️ This group has been banned from using the bot\nReason: ${reason}\n\nContact the bot owner for more information.`,
           targetID
         );
-        
+
         return global.api.sendMessage(
           `✅ Banned thread ${thread.threadName} (${targetID})\nReason: ${reason}`,
           threadID,
           messageID
         );
-        
+
       } catch (error) {
         global.logger.error('Error in ban thread command:', error.message);
         return global.api.sendMessage(
@@ -214,9 +216,117 @@ module.exports = {
           messageID
         );
       }
+    } else if (targetType === 'command') {
+      // Ban command in this group
+      try {
+        const commandName = args[1]?.toLowerCase();
+
+        if (!commandName) {
+          return global.api.sendMessage(
+            `⚠️ Please provide a command name.\nUsage: ${global.config.prefix}ban command [commandname]`,
+            threadID,
+            messageID
+          );
+        }
+
+        // Get thread settings
+        let thread = await global.Thread.findOne({ threadID });
+        if (!thread) {
+          return global.api.sendMessage(
+            `⚠️ Thread not found in database.`,
+            threadID,
+            messageID
+          );
+        }
+
+        // Initialize settings and bannedCommands if not exists
+        if (!thread.settings) {
+          thread.settings = {};
+        }
+        if (!thread.settings.bannedCommands) {
+          thread.settings.bannedCommands = [];
+        }
+
+        // List banned commands
+        if (commandName === 'list') {
+          const bannedList = thread.settings.bannedCommands;
+
+          if (bannedList.length === 0) {
+            return global.api.sendMessage(
+              `✅ No commands are banned in this group.`,
+              threadID,
+              messageID
+            );
+          }
+
+          const listText = bannedList.map((cmd, i) => `${i + 1}. ${cmd}`).join('\n');
+          return global.api.sendMessage(
+            `🚫 Banned Commands in this group:\n\n${listText}\n\n` +
+            `Use ${global.config.prefix}unban command [name] to unban.`,
+            threadID,
+            messageID
+          );
+        }
+
+        // Check if command exists
+        const commandExists = global.client.commands.has(commandName) ||
+          [...global.client.commands.values()].some(cmd =>
+            cmd.config.aliases?.includes(commandName)
+          );
+
+        if (!commandExists) {
+          return global.api.sendMessage(
+            `⚠️ Command "${commandName}" not found.`,
+            threadID,
+            messageID
+          );
+        }
+
+        // Check if already banned
+        if (thread.settings.bannedCommands.some(c => c.toLowerCase() === commandName)) {
+          return global.api.sendMessage(
+            `⚠️ Command "${commandName}" is already banned in this group.`,
+            threadID,
+            messageID
+          );
+        }
+
+        // Don't allow banning essential commands
+        const protectedCommands = ['ban', 'unban', 'help', 'cmd'];
+        if (protectedCommands.includes(commandName)) {
+          return global.api.sendMessage(
+            `⚠️ Cannot ban essential command "${commandName}".`,
+            threadID,
+            messageID
+          );
+        }
+
+        // Add to banned list
+        thread.settings.bannedCommands.push(commandName);
+        await thread.save();
+
+        global.logger.system(`Command "${commandName}" was banned in thread ${threadID} by ${senderID}`);
+
+        return global.api.sendMessage(
+          `✅ Command "${commandName}" has been banned in this group.\n\n` +
+          `• Regular users cannot use this command\n` +
+          `• Owner, Admins, Supporters can still use it\n\n` +
+          `Use ${global.config.prefix}unban command ${commandName} to unban.`,
+          threadID,
+          messageID
+        );
+
+      } catch (error) {
+        global.logger.error('Error in ban command:', error.message);
+        return global.api.sendMessage(
+          '❌ An error occurred while banning the command',
+          threadID,
+          messageID
+        );
+      }
     } else {
       return global.api.sendMessage(
-        '❌ Invalid target type. Use "user" or "thread"',
+        '❌ Invalid target type. Use "user", "thread", or "command"',
         threadID,
         messageID
       );

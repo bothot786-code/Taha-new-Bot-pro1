@@ -9,8 +9,8 @@ module.exports = {
     aliases: ['steal'],
     description: 'Attempt to rob money from another user',
     usage: '{prefix}rob @user',
-    category: 'ECONOMY',
     credit: '𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭',
+    category: 'ECONOMY',
     hasPrefix: true,
     permission: 'PUBLIC',
     cooldown: 3600 // 1 hour cooldown

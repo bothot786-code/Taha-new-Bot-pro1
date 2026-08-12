@@ -40,7 +40,7 @@ module.exports = {
     description: "Manage and display colorful logs",
     usages: "{prefix}logs <on/off>",
     credit: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-    category: "ADMIN",
+    category: 'ADMIN',
     hasPrefix: true,
     permission: "ADMIN",
     cooldowns: 5

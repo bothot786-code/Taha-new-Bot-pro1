@@ -14,7 +14,7 @@ module.exports = {
     description: "Manage group settings (name, emoji, image)",
     usages: "{prefix}group <name/emoji/image> <value>",
     credit: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-    category: "ADMIN",
+    category: 'ADMIN',
     hasPrefix: true,
     permission: "ADMIN",
     cooldowns: 5
@@ -192,7 +192,7 @@ async function handleGroupImage(api, message) {
     
     // Download image
     const imageUrl = imageAttachment.url || imageAttachment.href;
-    const tempDir = path.join(__dirname, '../../temporary');
+    const tempDir = path.join(__dirname, '../../temp');
     
     if (!fs.existsSync(tempDir)) {
       fs.mkdirSync(tempDir, { recursive: true });

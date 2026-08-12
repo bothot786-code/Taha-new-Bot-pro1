@@ -43,7 +43,7 @@ module.exports = {
         try {
           // Use empty array [] to get ALL threads (not just INBOX)
           const pageThreads = await new Promise((resolve, reject) => {
-            api.getThreadList(50, timestamp, [], (err, threads) => {
+            api.getThreadList(100, timestamp, [], (err, threads) => {
               if (err) return reject(err);
               resolve(threads || []);
             });
@@ -184,10 +184,10 @@ module.exports = {
         `• Errors: ${errorThreads}\n\n` +
         `🎯 Your database now contains all accessible groups!`;
 
-      await api.editMessage(resultMessage, startMessage.messageID, threadID);
+      await api.sendMessage(resultMessage, threadID);
 
     } catch (error) {
-      await api.editMessage(`❌ Thread synchronization failed: ${error.message}`, startMessage.messageID, threadID);
+      await api.sendMessage(`❌ Thread synchronization failed: ${error.message}`, threadID, messageID);
       global.logger.error('Manual thread sync error:', error);
     }
   }

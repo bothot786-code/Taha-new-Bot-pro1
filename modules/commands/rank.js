@@ -257,7 +257,7 @@ module.exports = {
       }
 
       // 6. Save Image to Temp
-      const tempDir = path.join(__dirname, 'temporary');
+      const tempDir = path.join(__dirname, 'temp');
       if (!fs.existsSync(tempDir)) {
         fs.mkdirSync(tempDir, { recursive: true });
       }

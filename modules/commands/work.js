@@ -10,7 +10,7 @@ module.exports = {
     description: 'Work to earn money',
     usage: '{prefix}work',
     credit: '𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭',
-    category: 'economy',
+    category: 'ECONOMY',
     hasPrefix: true,
     permission: 'PUBLIC',
     cooldown: 3600 // 1 hour cooldown

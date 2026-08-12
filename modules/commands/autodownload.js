@@ -14,6 +14,20 @@ const FILE_DOWNLOAD_TIMEOUT_MS = 60000;
 const UPLOAD_RETRY_DELAY_MS = 3000;
 const NETWORK_RETRY_ATTEMPTS = 3;
 
+const PRIYANSH_API_BASE = "https://priyanshuapi.qzz.io/api/runner";
+
+const API_PLATFORMS = {
+  facebook: "facebook-downloader",
+  instagram: "instagram-downloader",
+  twitter: "twitter-downloader"
+};
+// Har platform ka display label (video title me use hota hai).
+const PLATFORM_LABELS = {
+  facebook: "Facebook",
+  instagram: "Instagram",
+  twitter: "Twitter/X"
+};
+
 let autoDownloadEnabled = true; // Global toggle for auto-download
 const processedMessages = new Set(); // Track processed messages to prevent duplicates
 
@@ -205,8 +219,14 @@ async function downloadAndSend(api, message, url, platform) {
   try {
     setReaction("⌛");
 
-    const videoInfo = await safeDownloadVideo(url);
-    const selection = selectVideoLink(platform, videoInfo);
+    // [FCA-PRIYANSH FIX #70] Facebook/Instagram -> reliable qzz.io API. Baaki -> npm package.
+    let selection;
+    if (API_PLATFORMS[platform]) {
+      selection = await fetchViaPriyanshApi(platform, url);
+    } else {
+      const videoInfo = await safeDownloadVideo(url);
+      selection = selectVideoLink(platform, videoInfo);
+    }
 
     if (!selection || !selection.hdLink) {
       setReaction("❌");
@@ -228,8 +248,11 @@ async function downloadAndSend(api, message, url, platform) {
 
     setReaction("✅");
   } catch (error) {
-    console.error(`Error in downloadAndSend for ${platform}:`, error);
-    global.logger?.error(`Error in downloadAndSend for ${platform}:`, error.message);
+    // [FIX] error plain object ({error, statusCode}) ho sakta hai -> error.message undefined aata tha
+    //   ("Error in downloadAndSend ... undefined"). Ab readable message banao.
+    const errMsg = error?.message || error?.error || (typeof error === 'string' ? error : JSON.stringify(error));
+    console.error(`Error in downloadAndSend for ${platform}:`, errMsg);
+    global.logger?.error(`Error in downloadAndSend for ${platform}: ${errMsg}`);
     setReaction("❌");
 
     const isTimeout = error.message?.toLowerCase().includes('timeout') ||
@@ -243,6 +266,52 @@ async function downloadAndSend(api, message, url, platform) {
     api.sendMessage(userMessage, threadID, messageID);
   } finally {
     cleanupFile(tempFilePath);
+  }
+}
+
+// [FCA-PRIYANSH FIX #70] Priyanshu qzz.io API se media link nikaalo (Facebook/Instagram).
+//   Returns { hdLink, videoTitle } ya { errorMessage }.
+async function fetchViaPriyanshApi(platform, url) {
+  const apiKey = global.config?.apiKeys?.priyanshuApi;
+  if (!apiKey) {
+    return { errorMessage: "❌ API key not found in config (apiKeys.priyanshuApi)." };
+  }
+  const endpoint = API_PLATFORMS[platform];
+  try {
+    const resp = await axios.post(
+      `${PRIYANSH_API_BASE}/${endpoint}`,
+      { url },
+      {
+        headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+        timeout: DOWNLOAD_TIMEOUT_MS
+      }
+    );
+    const resData = resp.data;
+    if (!resData || !resData.success || !resData.data) {
+      return { errorMessage: `❌ Could not fetch that ${platform} video (API said no).` };
+    }
+    const data = resData.data;
+    const media = Array.isArray(data.media) ? data.media : [];
+
+    // Prefer SD (360p) first (smaller = uploads reliably), then HD (720p), then any downloadUrl.
+    const pick = (kw) => media.find(m => m.quality && m.quality.toLowerCase().includes(kw));
+    const sd = pick("360") || pick("sd");
+    const hd = pick("720") || pick("hd");
+    // [FCA-PRIYANSH FIX #80] Twitter response me quality "Original Quality" hota hai (koi 360/720 nahi),
+    //   isliye downloadUrl / pehli media entry pe fallback zaroori hai.
+    const hdLink = (sd && sd.url) || (hd && hd.url) || data.downloadUrl || (media[0] && media[0].url);
+
+    if (!hdLink) {
+      return { errorMessage: `❌ No downloadable ${platform} video link found.` };
+    }
+    const label = PLATFORM_LABELS[platform] || (platform.charAt(0).toUpperCase() + platform.slice(1));
+    return {
+      hdLink,
+      videoTitle: `--『 𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 🄱🄾🅃 』--\nHere's the ${label} video you requested:`
+    };
+  } catch (e) {
+    const msg = e?.response?.data?.message || e?.message || String(e);
+    return { errorMessage: `❌ ${platform} download failed: ${msg}` };
   }
 }
 
@@ -373,7 +442,8 @@ async function downloadFileWithTimeout(url, filePath) {
 
 async function sendVideoWithRetry({ api, threadID, originalMessageID, body, filePath }) {
   let attempt = 1;
-  while (attempt <= 2) {
+  const maxAttempts = 3;
+  while (attempt <= maxAttempts) {
     try {
       const payload = {
         body,
@@ -382,11 +452,28 @@ async function sendVideoWithRetry({ api, threadID, originalMessageID, body, file
       await sendAttachment(api, threadID, payload, originalMessageID);
       return;
     } catch (error) {
-      const errText = String(error?.message || error);
-      const is408 = errText.includes('status code: 408');
+      
+      const errText = String(error?.message || error?.error || error || '');
+      
+      const fbCode = (typeof error?.error === 'number') ? error.error : Number(error?.error);
+      const isTransientFb = [1357054, 1357001, 1357004, 1357032].includes(fbCode);
+      const is408 =
+        error?.statusCode === 408 ||
+        errText.includes('408') ||
+        errText.toLowerCase().includes('empty response from facebook');
 
-      if (is408 && attempt < 2) {
-        await delay(UPLOAD_RETRY_DELAY_MS);
+      if ((is408 || isTransientFb) && attempt < maxAttempts) {
+        
+       
+        try {
+          if (typeof api.refreshFb_dtsg === 'function') {
+            const refreshed = await api.refreshFb_dtsg();
+            console.warn(`[autodownload] FB upload transient error (${is408 ? '408/empty' : fbCode}) — fb_dtsg refreshed=${refreshed}, retrying ${attempt}/${maxAttempts - 1}...`);
+          } else {
+            console.warn(`[autodownload] FB upload transient error (${is408 ? '408/empty' : fbCode}), retrying ${attempt}/${maxAttempts - 1}...`);
+          }
+        } catch (_) { /* refresh best-effort */ }
+        await delay(UPLOAD_RETRY_DELAY_MS * attempt);
         attempt += 1;
         continue;
       }

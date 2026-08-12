@@ -10,7 +10,7 @@ module.exports = {
     description: "Displays the URL to access the bot's web interface preview",
     usages: "{prefix}preview",
     credit: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-    category: "GENERAL",
+    category: 'GENERAL',
     hasPrefix: true,
     permission: "PUBLIC",
     cooldowns: 5

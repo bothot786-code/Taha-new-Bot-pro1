@@ -98,7 +98,7 @@ module.exports = {
       const secondAvatar = await getProfilePicture(api, secondUserID);
       
       // Create temporary directory if it doesn't exist
-      const tempDir = path.join(__dirname, 'temporary');
+      const tempDir = path.join(__dirname, 'temp');
       await fs.ensureDir(tempDir);
       
       // Generate the image based on the effect
