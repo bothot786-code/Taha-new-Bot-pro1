@@ -363,6 +363,76 @@ MongoDB models keep track of threads, users, anti-change locks, and currency sta
 <!-- Animated Divider -->
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
+## <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="30"> 🔑 Auto Re-Login & Auto-Recovery Setup
+
+Priyanshu FB Bot includes an **Automated Re-Login & Account Recovery System** powered by `fca-priyansh`. When configured, if Facebook logs out your bot or invalidates the `appstate.json` cookies, the bot engine can **automatically re-authenticate**, generate fresh cookies, save them to `appstate.json`, and recover connection seamlessly!
+
+---
+
+### 🌐 Step 1: Login & Save Credentials in Browser (MUST IMPORTANT!)
+
+> ⚠️ **CRITICAL STEP FOR ACCOUNT SAFETY & AUTO-RECOVERY**:
+> Facebook tracks trusted browser device sessions. Follow these exact steps to ensure smooth auto-recovery:
+
+1. Open a **NEW/Fresh Browser Profile** or Incognito Window (Chrome, Edge, or Firefox).
+2. Go to [Facebook.com](https://www.facebook.com) and log into your Bot Account.
+3. ‼️ **MUST IMPORTANT**: When Facebook prompts to **"Save Password"** or **"Remember Browser / Device"**, click **SAVE / YES**!
+   - *Why is this important?* Saving the login info registers your current browser session as a trusted device on Facebook's servers, allowing `fca-priyansh` to re-login without checkpoint security blocks.
+4. Export the account cookies (`appstate.json`) using your browser cookie extension.
+5. Paste the exported cookies into [`appstate.json`](file:///f:/priyanshu-fb-bot/appstate.json) at the root of your bot folder.
+
+---
+
+### 🔐 Step 2: Configure Auto Re-Login Credentials
+
+Provide your bot account's Facebook Email & Password so `fca-priyansh` can execute auto-relogin upon cookie expiry:
+
+#### Option A: Via `.env` File (Recommended)
+Create or edit `.env` in your workspace root:
+```env
+FB_EMAIL="your_bot_email@gmail.com"
+FB_PASSWORD="your_bot_password"
+```
+
+#### Option B: Via `PriyanshFca_Database/credential.json`
+Inside `PriyanshFca_Database/credential.json` (or `credential.json`):
+```json
+{
+  "email": "your_bot_email@gmail.com",
+  "password": "your_bot_password"
+}
+```
+
+---
+
+### ⚡ How Auto-Recovery Works at Runtime:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 1. Appstate / Cookie Expiry                 │
+│  - Session dies or Facebook invalidates cookies             │
+└──────────────┬──────────────────────────────────────────────┘
+               │
+               ▼
+┌─────────────────────────────────────────────────────────────┐
+│               2. Auto Re-Login Trigger                      │
+│  - Engine reads saved Email & Password from .env / json     │
+│  - Uses trusted device credentials to re-authenticate       │
+└──────────────┬──────────────────────────────────────────────┘
+               │
+               ▼
+┌─────────────────────────────────────────────────────────────┐
+│               3. Self-Recovery & Hot-Reload                 │
+│  - Generates fresh `appstate.json` cookies                  │
+│  - Saves new appstate to disk & resumes MQTT listener        │
+└─────────────────────────────────────────────────────────────┘
+```
+
+> 💡 **Result**: Your bot recovers automatically on session logouts without requiring manual cookie re-exporting!
+
+<!-- Animated Divider -->
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+
 ## <img src="https://media.giphy.com/media/WFZvB7VIXBgiz3oDXE/giphy.gif" width="30"> Configuration Reference
 
 <div align="center">
