@@ -68,8 +68,8 @@
     "mode": "public"
   },
   "github": {
-    "token": "YOUR_GITHUB_TOKEN",
-    "owner": "YOUR_USERNAME",
-    "repo": "YOUR_REPO_NAME"
+    "token": "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",
+    "owner": "tahachandia331_db_user",
+    "repo": "https://github.com/bothot786-code/Taha-new-Bot-pro1"
   }
 }
