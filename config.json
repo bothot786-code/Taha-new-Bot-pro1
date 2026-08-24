@@ -1,13 +1,13 @@
 {
   "mongoURI": "mongodb+srv://tahachandia331_db_user:RY2jwYZuvKaSjveG@cluster0.ezhtpjs.mongodb.net/?appName=Cluster0",
   "appstateSyncMinutes": 10,
-  "ownerID": "100037743553265",
+  "ownerID": "61589228205444",
   "adminIDs": [
-    "100037743553265",
+    "61589228205444",
     "ADMIN_ID_2"
   ],
   "supportIDs": [
-    "100037743553265",
+    "61589228205444",
     "SUPPORT_ID_2"
   ],
   "adminInboxThreadID": "6567071300016227",
