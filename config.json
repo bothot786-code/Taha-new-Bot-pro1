@@ -1,17 +1,17 @@
 {
   "mongoURI": "mongodb+srv://tahachandia331_db_user:RY2jwYZuvKaSjveG@cluster0.ezhtpjs.mongodb.net/?appName=Cluster0",
   "appstateSyncMinutes": 10,
-  "ownerID": "61589228205444",
+  "ownerID": "100075933317520",
   "adminIDs": [
     "61589228205444",
     "ADMIN_ID_2"
   ],
   "supportIDs": [
-    "61589228205444",
+    "100075933317520",
     "SUPPORT_ID_2"
   ],
-  "adminInboxThreadID": "6567071300016227",
-  "prefix": "/",
+  "adminInboxThreadID": "61590672685861",
+  "prefix": "*",
   "fcaOptions": {
     "forceLogin": false,
     "updatePresence": true,
@@ -25,7 +25,7 @@
     "autoReconnect": true,
     "userAgent": "Mozilla/5.0 (X11; Linux aarch64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 CrKey/1.54.250320"
   },
-  "botNickname": "FB Bot",
+  "botNickname": "TAHA KHAN",
   "commandEnabled": true,
   "eventEnabled": true,
   "announceImageChange": true,
