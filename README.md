@@ -1,7 +1,7 @@
 <div align="center">
 
-<!-- Animated Soft Gradient Header with Smooth Wave -->
-<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=24&height=180&section=header&text=PRIYANSHU%20FB%20BOT&fontSize=55&fontColor=fff&animation=twinkling&fontAlignY=45" width="100%" />
+<!-- Animated Soft Gradient Header with Smooth Wave -->0
+<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=24&height=180&section=header&text=TAHA-KHAN%20FB%20BOT&fontSize=55&fontColor=fff&animation=twinkling&fontAlignY=45" width="100%" />
 
 <!-- Animated Gradient Line -->
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="100%" />
@@ -59,12 +59,12 @@
 ## <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="30"> Overview
 
 <div align="center">
-  <img src="https://img.shields.io/badge/Made%20with-❤️%20by%20Priyanshu%20Rajput-FF6B6B?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Made%20with-❤️%20by%20TAHA-KHAN%20Rajput-FF6B6B?style=for-the-badge" />
 </div>
 
 <br>
 
-**Priyanshu FB Bot** is a full-featured Messenger automation platform by **Priyanshu Rajput**.  
+**Priyanshu FB Bot** is a full-featured Messenger automation platform by **TAHA-KHAN**.  
 It runs on top of **Node.js**, **MongoDB**, and the battle-tested [`fca-priyansh`](https://www.npmjs.com/package/fca-priyansh) engine.  
 The bot authenticates using **Facebook cookies (appstate.json)** and ships with more than **140 commands** covering moderation, engagement, AI utilities, and automation workflows.
 
@@ -618,7 +618,7 @@ Inside `PriyanshFca_Database/credential.json` (or `credential.json`):
 
 <img src="https://img.shields.io/badge/MIT-License-6366F1?style=for-the-badge&logo=opensourceinitiative&logoColor=white" />
 
-**MIT © Priyanshu Rajput**
+**MIT © TAHA KHAN**
 
 <br>
 
