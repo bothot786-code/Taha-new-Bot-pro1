@@ -28,7 +28,7 @@ module.exports = {
     aliases: ["ask", "chat"],
     description: "Talk to bot (powered by Taha Khan AI)",
     usage: "{prefix}ai <your message>",
-    credit: "𝐓𝐚𝐡𝐚 𝐊𝐡𝐚𝐧",
+    credit: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
     hasPrefix: false,
     permission: 'PUBLIC',
     cooldown: 5,
