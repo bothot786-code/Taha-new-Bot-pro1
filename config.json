@@ -1,5 +1,5 @@
 {
-  "mongoURI": "mongodb+srv://bothot786_db_user:46ms9JOwE28hzVtl@cluster0.pfuswls.mongodb.net/?appName=Cluster0",
+  "mongoURI": "",
   "appstateSyncMinutes": 10,
   "ownerID": "100075933317520",
   "adminIDs": [
