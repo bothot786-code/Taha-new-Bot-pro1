@@ -555,7 +555,7 @@ Inside `PriyanshFca_Database/credential.json` (or `credential.json`):
 
 **Current maintainer: TAHA KHAN**
 
-The existing MIT copyright and original-author credit are retained below.
+The original copyright notice is preserved in [LICENSE](./LICENSE).
 
 <div align="center">
 
@@ -565,9 +565,9 @@ The existing MIT copyright and original-author credit are retained below.
 <br>
 
 <!-- Original author credit -->
-<p><strong>Original author and copyright holder: Priyanshu Rajput</strong></p>
+<p><strong>Original author credit: see [LICENSE](./LICENSE).</strong></p>
 
-<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24&height=100&text=Original%20author%3A%20Priyanshu%20Rajput&fontSize=35&fontColor=fff&animation=twinkling" width="70%" />
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24&height=100&text=Original%20author%20credit%3A%20see%20LICENSE&fontSize=35&fontColor=fff&animation=twinkling" width="70%" />
 
 <br>
 
@@ -624,7 +624,7 @@ The existing MIT copyright and original-author credit are retained below.
 
 <img src="https://img.shields.io/badge/MIT-License-6366F1?style=for-the-badge&logo=opensourceinitiative&logoColor=white" />
 
-**MIT License — Copyright (c) 2024–2025 Priyanshu Rajput**  
+**MIT License — original copyright notice is preserved in [LICENSE](./LICENSE).**  
 **Current maintainer: TAHA KHAN**
 
 <br>
