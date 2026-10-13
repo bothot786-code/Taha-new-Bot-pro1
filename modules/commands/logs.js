@@ -70,7 +70,7 @@ module.exports = {
         `• User name & ID with random colors\n` +
         `• Message content with random colors\n` +
         `• Timestamp with random colors\n` +
-        `• Beautiful separator with PRIYANSH BOT🐧`;
+        `• Beautiful separator with TAHA KHAN BOT🐧`;
       
       return api.editMessage(helpText, statusMsg.messageID);
     }
@@ -125,7 +125,7 @@ function logMessage(details) {
     chalk.hex("#" + random1)(`[📝]→ User ID: ${userID}`) + `\n` + 
     chalk.hex("#" + random2)(`[📩]→ Content: ${userMessage}`) + `\n` + 
     chalk.hex("#" + random3)(`[ ${time} ]`) + `\n` + 
-    chalk.hex("#" + random4)(`◆━━━━━━━━━◆PRIYANSH BOT🐧◆━━━━━━━━◆\n`)
+    chalk.hex("#" + random4)(`◆━━━━━━━━━◆TAHA KHAN BOT🐧◆━━━━━━━━◆\n`)
   );
 }
 
