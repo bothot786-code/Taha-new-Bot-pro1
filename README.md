@@ -1,7 +1,7 @@
 <div align="center">
 
 <!-- Animated Soft Gradient Header with Smooth Wave -->0
-<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=24&height=180&section=header&text=TAHA-KHAN%20FB%20BOT&fontSize=55&fontColor=fff&animation=twinkling&fontAlignY=45" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=24&height=180&section=header&text=TAHA%20KHAN%20FB%20BOT&fontSize=55&fontColor=fff&animation=twinkling&fontAlignY=45" width="100%" />
 
 <!-- Animated Gradient Line -->
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="100%" />
@@ -33,7 +33,7 @@
 
 <!-- Stats Badges -->
 <p>
-  <img src="https://img.shields.io/badge/Platform-GitLab-FC6D26?style=for-the-badge&logo=gitlab&logoColor=white" />
+  <img src="https://img.shields.io/badge/Platform-GitHub-181717?style=for-the-badge&logo=github&logoColor=white" />
   <img src="https://img.shields.io/badge/Status-Active-00C853?style=for-the-badge&logo=statuspage&logoColor=white" />
 </p>
 
@@ -42,7 +42,7 @@
 <img src="https://user-images.githubusercontent.com/74038190/216122041-518ac897-8d92-4c6b-9b3f-ca01dcaf38ee.png" width="80" />
 <br><br>
 <a href="https://m.me/j/AbZrTwa47MZstkC1/">
-  <img src="https://img.shields.io/badge/Join%20Community-Priyanshu%20Bot%20Group-0078FF?style=for-the-badge&logo=messenger&logoColor=white" />
+  <img src="https://img.shields.io/badge/Join%20the%20Bot-Community-0078FF?style=for-the-badge&logo=messenger&logoColor=white" />
 </a>
 <br>
 <sub>Need help or want to connect with other users? Join our Messenger community!</sub>
@@ -59,12 +59,12 @@
 ## <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="30"> Overview
 
 <div align="center">
-  <img src="https://img.shields.io/badge/Made%20with-❤️%20by%20TAHA-KHAN%20Rajput-FF6B6B?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Made%20with-❤️%20by%20TAHA%20KHAN-FF6B6B?style=for-the-badge" />
 </div>
 
 <br>
 
-**Priyanshu FB Bot** is a full-featured Messenger automation platform by **TAHA-KHAN**.  
+**Taha Khan FB Bot** is a full-featured Messenger automation platform currently maintained by **TAHA KHAN**.  
 It runs on top of **Node.js**, **MongoDB**, and the battle-tested [`fca-priyansh`](https://www.npmjs.com/package/fca-priyansh) engine.  
 The bot authenticates using **Facebook cookies (appstate.json)** and ships with more than **140 commands** covering moderation, engagement, AI utilities, and automation workflows.
 
@@ -171,10 +171,10 @@ graph TB
 
 ```bash
 # Clone the repository
-git clone https://gitlab.com/priyanshufsdev/priyanshu-fb-bot.git
+git clone https://github.com/tahachandia84/Taha-new-Bot-pro1.git
 
 # Navigate to directory
-cd priyanshu-fb-bot
+cd Taha-new-Bot-pro1
 
 # Install dependencies
 npm install
@@ -221,8 +221,8 @@ npm install
   
   "github": {                        // 🐙 GitHub sync config
     "token": "github_pat_xxx",
-    "owner": "itsmepriyansh",
-    "repo": "bot-test"
+    "owner": "tahachandia84",
+    "repo": "Taha-new-Bot-pro1"
   }
 }
 ```
@@ -365,7 +365,7 @@ MongoDB models keep track of threads, users, anti-change locks, and currency sta
 
 ## <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="30"> 🔑 Auto Re-Login & Auto-Recovery Setup
 
-Priyanshu FB Bot includes an **Automated Re-Login & Account Recovery System** powered by `fca-priyansh`. When configured, if Facebook logs out your bot or invalidates the `appstate.json` cookies, the bot engine can **automatically re-authenticate**, generate fresh cookies, save them to `appstate.json`, and recover connection seamlessly!
+Taha Khan FB Bot includes an **Automated Re-Login & Account Recovery System** powered by `fca-priyansh`. When configured, if Facebook logs out your bot or invalidates the `appstate.json` cookies, the bot engine can **automatically re-authenticate**, generate fresh cookies, save them to `appstate.json`, and recover connection seamlessly!
 
 ---
 
@@ -379,7 +379,7 @@ Priyanshu FB Bot includes an **Automated Re-Login & Account Recovery System** po
 3. ‼️ **MUST IMPORTANT**: When Facebook prompts to **"Save Password"** or **"Remember Browser / Device"**, click **SAVE / YES**!
    - *Why is this important?* Saving the login info registers your current browser session as a trusted device on Facebook's servers, allowing `fca-priyansh` to re-login without checkpoint security blocks.
 4. Export the account cookies (`appstate.json`) using your browser cookie extension.
-5. Paste the exported cookies into [`appstate.json`](file:///f:/priyanshu-fb-bot/appstate.json) at the root of your bot folder.
+5. Paste the exported cookies into `appstate.json` at the root of your bot folder.
 
 ---
 
@@ -446,10 +446,10 @@ Inside `PriyanshFca_Database/credential.json` (or `credential.json`):
 | `server.port` | Web preview + uptime port (auto fallback to 4001 if busy) | `4000` |
 | `server.autoUptimeMonitoring` | Ping Render/uptime robot automatically | `true` |
 | `sessionManagement.refreshIntervalMinutes` | How often to refresh tokens | `10` |
-| `github.token/owner/repo` | Used when `/update full` pushes to GitHub | `"github_pat_xxx"` / `"itsmepriyansh"` / `"bot-test"` |
+| `github.token/owner/repo` | Used when `/update full` pushes to GitHub | `"github_pat_xxx"` / `"tahachandia84"` / `"Taha-new-Bot-pro1"` |
 | `spamBanSettings` | Anti-spam auto-ban thresholds | `maxCommands`, `timeWindow`, `banDuration` |
 | `facebookToken` | Optional graph token for helper APIs | string |
-| `botNickname` | Display nickname used by helper commands | `"Priyanshu FB Bot"` |
+| `botNickname` | Display nickname used by helper commands | `"Taha Khan FB Bot"` |
 
 </div>
 
@@ -551,7 +551,11 @@ Inside `PriyanshFca_Database/credential.json` (or `credential.json`):
 <!-- Rainbow Divider -->
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
-## <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> Maintainer
+## <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> Current Maintainer & Original Author
+
+**Current maintainer: TAHA KHAN**
+
+The existing MIT copyright and original-author credit are retained below.
 
 <div align="center">
 
@@ -560,8 +564,10 @@ Inside `PriyanshFca_Database/credential.json` (or `credential.json`):
 
 <br>
 
-<!-- Animated Developer Card -->
-<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24&height=100&text=Priyanshu%20Rajput&fontSize=35&fontColor=fff&animation=twinkling" width="70%" />
+<!-- Original author credit -->
+<p><strong>Original author and copyright holder: Priyanshu Rajput</strong></p>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24&height=100&text=Original%20author%3A%20Priyanshu%20Rajput&fontSize=35&fontColor=fff&animation=twinkling" width="70%" />
 
 <br>
 
@@ -618,13 +624,14 @@ Inside `PriyanshFca_Database/credential.json` (or `credential.json`):
 
 <img src="https://img.shields.io/badge/MIT-License-6366F1?style=for-the-badge&logo=opensourceinitiative&logoColor=white" />
 
-**MIT © TAHA KHAN**
+**MIT License — Copyright (c) 2024–2025 Priyanshu Rajput**  
+**Current maintainer: TAHA KHAN**
 
 <br>
 
 <img src="https://img.shields.io/badge/⚠️-Use%20Responsibly-FF6B6B?style=flat-square" />
 
-*Respect Facebook's platform policies and community guidelines when deploying Priyanshu FB Bot.*
+*Respect Facebook's platform policies and community guidelines when deploying Taha Khan FB Bot.*
 
 </div>
 
@@ -633,10 +640,10 @@ Inside `PriyanshFca_Database/credential.json` (or `credential.json`):
 
 <div align="center">
 
-**⭐ Star this repo on GitLab if you found it helpful! ⭐**
+**⭐ Star this repo on GitHub if you found it helpful! ⭐**
 
-<a href="https://gitlab.com/priyanshufsdev/priyanshu-fb-bot">
-  <img src="https://img.shields.io/badge/View%20on-GitLab-FC6D26?style=for-the-badge&logo=gitlab&logoColor=white" />
+<a href="https://github.com/tahachandia84/Taha-new-Bot-pro1">
+  <img src="https://img.shields.io/badge/View%20on-GitHub-181717?style=for-the-badge&logo=github&logoColor=white" />
 </a>
 
 </div>
